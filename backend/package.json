@@ -1,0 +1,32 @@
+{
+  "name": "google-meet-clone-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Backend API for a Google Meet clone",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "node.exe dist\\server.js",
+    "build": "node.exe .\\node_modules\\typescript\\lib\\tsc.js",
+    "start": "node.exe dist\\server.js",
+    "typecheck": "node.exe .\\node_modules\\typescript\\lib\\tsc.js --noEmit"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.14.0",
+    "sequelize": "^6.37.6",
+    "socket.io": "^4.8.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.15.0",
+    "typescript": "^5.8.3"
+  }
+}
