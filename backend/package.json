@@ -5,12 +5,16 @@
   "type": "module",
   "description": "Backend API for a Google Meet clone",
   "main": "dist/server.js",
-  "scripts": {
-    "dev": "node.exe dist\\server.js",
-    "build": "node.exe .\\node_modules\\typescript\\lib\\tsc.js",
-    "start": "node.exe dist\\server.js",
-    "typecheck": "node.exe .\\node_modules\\typescript\\lib\\tsc.js --noEmit"
-  },
+ 
+
+"scripts": {
+  "dev": "node dist/server.js",
+  "build": "tsc",
+  "start": "node dist/server.js",
+  "typecheck": "tsc --noEmit"
+}
+
+,
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
