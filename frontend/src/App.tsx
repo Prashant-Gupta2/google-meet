@@ -5,8 +5,10 @@ type Mode = 'signin' | 'signup';
 type User = { email: string; organizationId: number };
 type AuthResponse = { message?: string; token?: string; user?: User };
 
-const apiUrl = import.meta.env.VITE_API_URL ?? '/api';
-
+const apiUrl =
+  import.meta.env.VITE_API_URL ||
+  "https://google-meet-backend-1xih.onrender.com/api";
+  
 export function MeetingView({ user, code, onLeave }: { user: User; code: string; onLeave: () => void }) {
   const cameraVideoRef = useRef<HTMLVideoElement>(null);
   const shareVideoRef = useRef<HTMLVideoElement>(null);

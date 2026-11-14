@@ -6,8 +6,10 @@ type Participant = { socketId: string; email: string; role: 'admin' | 'guest' };
 type Signal = { type: string; sdp?: string; candidate?: RTCIceCandidateInit };
 type RemoteVideo = { participant: Participant; stream: MediaStream };
 
-const realtimeUrl = import.meta.env.VITE_REALTIME_URL || (import.meta.env.DEV ? 'http://127.0.0.1:5000' : window.location.origin);
-
+const realtimeUrl =
+  import.meta.env.VITE_REALTIME_URL ||
+  "https://google-meet-backend-1xih.onrender.com";
+  
 export function RealtimeMeetingView({ user, code, token, createRoom, onLeave, onAuthExpired }: { user: User; code: string; token: string; createRoom: boolean; onLeave: () => void; onAuthExpired: () => void }) {
   const localVideoRef = useRef<HTMLVideoElement>(null);
   const localStreamRef = useRef<MediaStream | null>(null);
