@@ -7,7 +7,7 @@ type AuthResponse = { message?: string; token?: string; user?: User };
 
 const apiUrl = import.meta.env.VITE_API_URL ?? '/api';
 
-function MeetingView({ user, code, onLeave }: { user: User; code: string; onLeave: () => void }) {
+export function MeetingView({ user, code, onLeave }: { user: User; code: string; onLeave: () => void }) {
   const cameraVideoRef = useRef<HTMLVideoElement>(null);
   const shareVideoRef = useRef<HTMLVideoElement>(null);
   const cameraStreamRef = useRef<MediaStream | null>(null);
@@ -155,10 +155,10 @@ function MeetingView({ user, code, onLeave }: { user: User; code: string; onLeav
 
       <footer className="flex items-center justify-center gap-3 border-t border-white/10 px-4 py-5">
         <div className="mr-2 hidden items-center gap-2 text-xs text-slate-400 sm:flex" title="Microphone input level"><span className={`h-2.5 w-2.5 rounded-full ${micStatus === 'working' ? 'bg-emerald-400' : micStatus === 'blocked' ? 'bg-red-400' : 'bg-amber-400'}`} /><span>{micStatus === 'working' ? 'Mic working' : micStatus === 'quiet' ? 'Mic is quiet' : micStatus === 'muted' ? 'Mic muted' : micStatus === 'blocked' ? 'Mic unavailable' : 'Checking mic…'}</span><span className="flex h-2 w-12 overflow-hidden rounded-full bg-white/15"><span className="bg-emerald-400 transition-all" style={{ width: `${micLevel}%` }} /></span></div>
-        <button onClick={toggleMic} className={`control-button ${!micOn ? 'bg-red-500' : ''}`} title={micOn ? 'Mute microphone' : 'Unmute microphone'}>{micOn ? '🎙' : '🔇'}</button>
-        <button onClick={toggleCamera} className={`control-button ${!cameraOn ? 'bg-red-500' : ''}`} title={cameraOn ? 'Turn off camera' : 'Turn on camera'}>{cameraOn ? '▣' : '▧'}</button>
+        <button onClick={toggleMic} className={`grid h-12 w-12 place-items-center rounded-full text-[1.1rem] transition-colors ${micOn ? 'bg-[#343539] hover:bg-[#4a4b50]' : 'bg-red-500 hover:bg-red-400'}`} title={micOn ? 'Mute microphone' : 'Unmute microphone'}>{micOn ? '🎙' : '🔇'}</button>
+        <button onClick={toggleCamera} className={`grid h-12 w-12 place-items-center rounded-full text-[1.1rem] transition-colors ${cameraOn ? 'bg-[#343539] hover:bg-[#4a4b50]' : 'bg-red-500 hover:bg-red-400'}`} title={cameraOn ? 'Turn off camera' : 'Turn on camera'}>{cameraOn ? '▣' : '▧'}</button>
         <button onClick={shareScreen} className={`rounded-full px-4 py-3 text-sm font-semibold transition ${sharing ? 'bg-red-500 text-white hover:bg-red-400' : 'bg-[#343539] text-white hover:bg-[#4a4b50]'}`} title={sharing ? 'Stop screen sharing' : 'Share screen'}>{sharing ? 'Stop sharing' : 'Share screen'}</button>
-        <button onClick={() => setShowPeople((visible) => !visible)} className="control-button" title="People">♙</button>
+        <button onClick={() => setShowPeople((visible) => !visible)} className="grid h-12 w-12 place-items-center rounded-full bg-[#343539] text-[1.1rem] transition-colors hover:bg-[#4a4b50]" title="People">♙</button>
         <button onClick={onLeave} className="ml-3 rounded-full bg-red-500 px-5 py-3 text-sm font-semibold hover:bg-red-400">End call</button>
       </footer>
     </main>
@@ -292,7 +292,7 @@ export function App() {
               <h2 className="mt-7 text-xl font-semibold">Join with a code</h2>
               <p className="mt-2 text-sm leading-6 text-slate-500">Enter the meeting code shared with you.</p>
               <div className="mt-5 flex gap-2">
-                <input value={meetingCode} onChange={(event) => setMeetingCode(event.target.value)} className="field mt-0" placeholder="abc-defg-hij" aria-label="Meeting code" />
+                <input value={meetingCode} onChange={(event) => setMeetingCode(event.target.value)} className="mt-0 block w-full rounded-xl border border-slate-300 bg-white px-3.5 py-3 text-sm outline-none transition focus:border-cyan-500 focus:ring-4 focus:ring-cyan-400/20" placeholder="abc-defg-hij" aria-label="Meeting code" />
                 <button className="rounded-xl bg-cyan-500 px-5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400">Join</button>
               </div>
             </form>
@@ -342,9 +342,9 @@ export function App() {
               <p className="mt-2 text-sm text-slate-500">{mode === 'signin' ? 'Sign in to continue to your meetings.' : 'Create an account to join your organization.'}</p>
 
               <form className="mt-7 space-y-4" onSubmit={submit}>
-                {mode === 'signup' && <label className="block text-sm font-medium">Organization ID<input required min="1" type="number" value={organizationId} onChange={(event) => setOrganizationId(event.target.value)} className="field" /></label>}
-                <label className="block text-sm font-medium">Email address<input required type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} className="field" placeholder="you@company.com" /></label>
-                <label className="block text-sm font-medium">Password<input required minLength={8} type="password" autoComplete={mode === 'signin' ? 'current-password' : 'new-password'} value={password} onChange={(event) => setPassword(event.target.value)} className="field" placeholder="At least 8 characters" /></label>
+                {mode === 'signup' && <label className="block text-sm font-medium">Organization ID<input required min="1" type="number" value={organizationId} onChange={(event) => setOrganizationId(event.target.value)} className="mt-2 block w-full rounded-xl border border-slate-300 bg-white px-3.5 py-3 text-sm outline-none transition focus:border-cyan-500 focus:ring-4 focus:ring-cyan-400/20" /></label>}
+                <label className="block text-sm font-medium">Email address<input required type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} className="mt-2 block w-full rounded-xl border border-slate-300 bg-white px-3.5 py-3 text-sm outline-none transition focus:border-cyan-500 focus:ring-4 focus:ring-cyan-400/20" placeholder="you@company.com" /></label>
+                <label className="block text-sm font-medium">Password<input required minLength={8} type="password" autoComplete={mode === 'signin' ? 'current-password' : 'new-password'} value={password} onChange={(event) => setPassword(event.target.value)} className="mt-2 block w-full rounded-xl border border-slate-300 bg-white px-3.5 py-3 text-sm outline-none transition focus:border-cyan-500 focus:ring-4 focus:ring-cyan-400/20" placeholder="At least 8 characters" /></label>
                 {error && <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p>}
                 {success && <p className="rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">{success}</p>}
                 <button disabled={loading} className="mt-2 w-full rounded-xl bg-slate-950 px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60">{loading ? 'Please wait…' : mode === 'signin' ? 'Sign in to Meetly' : 'Create my account'}</button>
